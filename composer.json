@@ -1,0 +1,14 @@
+{
+    "name": "mcnd/thebugs",
+    "description": "A PSR-15 compliant library helping to trace errors in development and production environment",
+    "keywords" : ["debug","error","bug"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dave Mc Nicoll",
+            "email": "info@mcnd.ca"
+        }
+    ],
+    "require": {}
+}
