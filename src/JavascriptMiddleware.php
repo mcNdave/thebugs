@@ -21,10 +21,12 @@ class JavascriptMiddleware implements MiddlewareInterface
         "headers" => [
             "User-Agent" => "TheBugs/1.0",
         ],
+        # Callable functions
+        "functions" => []
     ];
 
     /**
-     * Filter list, allows custom invokable
+     * Filter list, allows custom invokable too
      * @var array
      */
     protected $filters = [];
@@ -52,6 +54,12 @@ class JavascriptMiddleware implements MiddlewareInterface
 
         foreach($this->filters['headers'] as $key => $value) {
             if ( ! in_array($value, $request->getHeader($key)) ) {
+                return $handler->handle($request);
+            }
+        }
+
+        foreach($this->filters['functions'] as $func) {
+            if ( $func->bindTo($this, $this)() ) {
                 return $handler->handle($request);
             }
         }

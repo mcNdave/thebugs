@@ -10,5 +10,10 @@
             "email": "info@mcnd.ca"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "TheBugs\\": "src/"
+        }
+    }
 }
