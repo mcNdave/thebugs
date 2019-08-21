@@ -48,9 +48,9 @@ class JavascriptMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        if ( ( $this->filters['code'] ?? false ) && ($this->filters['code'] !== $request->getCode())) {
-            return $handler->handle($request);
-        }
+       # if ( ( $this->filters['code'] ?? false ) && ($this->filters['code'] !== $request->getCode())) {
+       #     return $handler->handle($request);
+       # }
 
         foreach($this->filters['headers'] as $key => $value) {
             if ( ! in_array($value, $request->getHeader($key)) ) {
@@ -59,7 +59,7 @@ class JavascriptMiddleware implements MiddlewareInterface
         }
 
         foreach($this->filters['functions'] as $func) {
-            if ( $func->bindTo($this, $this)() ) {
+            if ( $func->call($this) ) {
                 return $handler->handle($request);
             }
         }
